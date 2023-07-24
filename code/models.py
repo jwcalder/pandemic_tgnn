@@ -10,13 +10,13 @@ import scipy.sparse as sp
 from sklearn import preprocessing
 from sklearn.preprocessing import MinMaxScaler
 
-from fbprophet import Prophet
+from prophet import Prophet
 from statsmodels.tsa.arima_model import ARIMA
 
 from PyInstaller.utils.hooks import collect_submodules, collect_data_files
 
-hiddenimports = collect_submodules('fbprophet')
-datas = collect_data_files('fbprophet')
+hiddenimports = collect_submodules('prophet')
+datas = collect_data_files('prophet')
 
 
 
