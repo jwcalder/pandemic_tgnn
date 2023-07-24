@@ -101,7 +101,7 @@ if __name__ == '__main__':
         fw = open("../results/results_"+country+".csv","a")
 
         
-        for args.model in ["PROPHET","ARIMA","AVG_WINDOW","AVG","MPNN","MPNN_LSTM","LSTM"]:#
+        for args.model in ["MPNN"]:#["PROPHET","ARIMA","AVG_WINDOW","AVG","MPNN","MPNN_LSTM","LSTM"]:#
             
             if(args.model=="PROPHET"):
 
