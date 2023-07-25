@@ -16,10 +16,10 @@ import os
     
 def read_meta_datasets(window):
     os.chdir("../data")
-    meta_labs = []
-    meta_graphs = []
-    meta_features = []
-    meta_y = []
+    meta_labs = {}
+    meta_graphs = {}
+    meta_features = {}
+    meta_y = {}
 
     #------------------ Italy
     os.chdir("Italy")
@@ -39,14 +39,14 @@ def read_meta_datasets(window):
     labels = labels.loc[list(Gs[0].nodes()),:]
     labels = labels.loc[:,dates]    
      
-    meta_labs.append(labels)
+    meta_labs['IT'] = labels
     gs_adj = [nx.adjacency_matrix(kgs).toarray().T for kgs in Gs]
 
-    meta_graphs.append(gs_adj)
+    meta_graphs['IT'] = gs_adj
 
     features = generate_new_features(Gs ,labels ,dates ,window )
 
-    meta_features.append(features)
+    meta_features['IT'] = features
 
     y = list()
     for i,G in enumerate(Gs):
@@ -54,7 +54,7 @@ def read_meta_datasets(window):
         for node in G.nodes():
             y[i].append(labels.loc[node,dates[i]])
 
-    meta_y.append(y)
+    meta_y['IT'] = y
 
     
     
@@ -77,15 +77,15 @@ def read_meta_datasets(window):
     labels = labels.loc[list(Gs[0].nodes()),:]
     labels = labels.loc[:,dates]    #labels.sum(1).values>10
    
-    meta_labs.append(labels)
+    meta_labs['ES'] = labels
 
     gs_adj = [nx.adjacency_matrix(kgs).toarray().T for kgs in Gs]
 
-    meta_graphs.append(gs_adj)
+    meta_graphs['ES'] = gs_adj
 
     features = generate_new_features(Gs ,labels ,dates ,window )
 
-    meta_features.append(features)
+    meta_features['ES'] = features
 
     y = list()
     for i,G in enumerate(Gs):
@@ -93,7 +93,7 @@ def read_meta_datasets(window):
         for node in G.nodes():
             y[i].append(labels.loc[node,dates[i]])
 
-    meta_y.append(y)
+    meta_y['ES'] = y
 
     
     
@@ -117,13 +117,13 @@ def read_meta_datasets(window):
     #print(labels.shape)
     labels = labels.loc[:,dates]    
     
-    meta_labs.append(labels)
+    meta_labs['EN'] = labels
 
     gs_adj = [nx.adjacency_matrix(kgs).toarray().T for kgs in Gs]
-    meta_graphs.append(gs_adj)
+    meta_graphs['EN'] = gs_adj
 
     features = generate_new_features(Gs ,labels ,dates ,window)
-    meta_features.append(features)
+    meta_features['EN'] = features
 
     y = list()
     nodes_without_labels = set()
@@ -131,7 +131,7 @@ def read_meta_datasets(window):
         y.append(list())
         for node in G.nodes():
             y[i].append(labels.loc[node,dates[i]])
-    meta_y.append(y)
+    meta_y['EN'] = y
 
     #--- series of graphs and their respective dates
     #targets = produce_targets(dates, 'cases')
@@ -159,13 +159,13 @@ def read_meta_datasets(window):
 
     labels = labels.loc[list(Gs[0].nodes()),:]
     
-    meta_labs.append(labels)
+    meta_labs['FR'] = labels
 
-    meta_graphs.append(gs_adj)
+    meta_graphs['FR'] = gs_adj
 
     features = generate_new_features(Gs ,labels ,dates ,window)
 
-    meta_features.append(features)
+    meta_features['FR'] = features
 
     y = list()
     for i,G in enumerate(Gs):
@@ -173,7 +173,7 @@ def read_meta_datasets(window):
         for node in G.nodes():
             y[i].append(labels.loc[node,dates[i]])
 
-    meta_y.append(y)
+    meta_y['FR'] = y
     
     os.chdir("../../code")
 
